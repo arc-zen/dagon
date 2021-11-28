@@ -12,7 +12,7 @@ module.exports = {
 				.setRequired(true)
 		),
 	async execute(interaction) {
-		var nonasciitest = /[^A-Za-z0-9_,.-]/;
+		var nonasciitest = /[^A-Za-z 0-9_,.-?!.<>/'";:{}()|]/;
 		if (nonasciitest.test(interaction.options.getString("text"))) {
 			return interaction.reply(
 				"text contains non-ascii characters!!! i will complain and now subsequently not do anything!!! >:("
@@ -21,11 +21,11 @@ module.exports = {
 		Canvas.registerFont("./misc/FiraCode-Retina.ttf", {
 			family: "Monospace",
 		});
-		const canvas = Canvas.createCanvas(700, 250);
+		const canvas = Canvas.createCanvas(1000, 70);
 		const context = canvas.getContext("2d");
 		context.font = "60px 'Fira Code Retina'";
 		context.fillStyle = "#ffffff";
-		context.fillText(interaction.options.getString("text"), 0, 15);
+		context.fillText(interaction.options.getString("text"), 0, 60);
 		const attachment = new MessageAttachment(
 			canvas.toBuffer(),
 			"image.png"

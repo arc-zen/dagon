@@ -1,3 +1,9 @@
 {
-	"cSpell.words": ["discordjs", "isbot", "ispartnered", "premiumtier"]
+	"cSpell.words": [
+		"discordjs",
+		"isbot",
+		"ispartnered",
+		"isverified",
+		"premiumtier"
+	]
 }

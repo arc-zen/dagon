@@ -4,7 +4,7 @@ const Canvas = require("canvas");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("text")
-		.setDescription("attempts to generate text?")
+		.setDescription("attempts to generate text")
 		.addStringOption((option) =>
 			option
 				.setName("text")
@@ -12,17 +12,20 @@ module.exports = {
 				.setRequired(true)
 		),
 	async execute(interaction) {
+		var nonasciitest = /[^A-Za-z0-9_,.-]/;
+		if (nonasciitest.test(interaction.options.getString("text"))) {
+			return interaction.reply(
+				"text contains non-ascii characters!!! i will complain and now subsequently not do anything!!! >:("
+			);
+		}
+		Canvas.registerFont("./misc/FiraCode-Retina.ttf", {
+			family: "Monospace",
+		});
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext("2d");
-
-		const background = await Canvas.loadImage(
-			"https://github.com/arc-zen/WandererInJS/blob/master/img/wallpaper.png"
-		);
-
-		// This uses the canvas dimensions to stretch the image onto the entire canvas
-		context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-		// Use the helpful Attachment class structure to process the file for you
+		context.font = "60px 'Fira Code Retina'";
+		context.fillStyle = "#ffffff";
+		context.fillText(interaction.options.getString("text"), 0, 15);
 		const attachment = new MessageAttachment(
 			canvas.toBuffer(),
 			"image.png"

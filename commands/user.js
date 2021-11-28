@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -17,8 +18,8 @@ module.exports = {
 			target = interaction.options.getUser("user");
 		}
 		const isbot = target.bot ? "user is a bot" : "user is not a bot";
-		const embed = require("../generic.js")
-			.embed.setTitle(target.tag)
+		const embed = new MessageEmbed()
+			.setTitle(target.tag)
 			.setThumbnail(target.displayAvatarURL())
 			.setFooter(target.id)
 			.setDescription(

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageEmbed } = require("discord.js");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("server")
@@ -16,8 +17,8 @@ module.exports = {
 		else if (premiumtier == "TIER_2") premiumtier = "2";
 		else if (premiumtier == "TIER_3") premiumtier = "3";
 		// console.log(premiumtier);
-		const embed = require("../generic.js")
-			.embed.setTitle(interaction.guild.name)
+		const embed = new MessageEmbed()
+			.setTitle(interaction.guild.name)
 			.setThumbnail(interaction.guild.iconURL())
 			.setFooter(interaction.guild.id)
 			.setDescription(

@@ -24,27 +24,35 @@ module.exports = {
 			);
 		}
 		const online = resp.server.online
-			? "server is **online**"
-			: "server is **offline**";
+			? `${resp.server.name} is online`
+			: `${resp.server.name} is offline`;
 		const whiteliststatus = resp.server["white-list"]
-			? "server is whitelisted"
-			: "server is not whitelisted";
+			? `${resp.server.name} is whitelisted`
+			: `${resp.server.name} is not whitelisted`;
+		var description =
+			online +
+			"\n" +
+			resp.server.playerCount +
+			"/" +
+			resp.server.maxPlayers +
+			" players\n" +
+			`IP: ${resp.server.name}.minehut.gg\n` +
+			`ID: ${resp.server._id}\n` +
+			`Server Type: ${resp.server.server_version_type}\n` +
+			whiteliststatus +
+			"\n" +
+			`Server Plan: ${resp.server.activeServerPlan}\n` +
+			"**online players**:\n";
+		for (const n of resp.server.players) {
+			const onlineplayers = await fetch(
+				`https://api.ashcon.app/mojang/v2/user/${n}`
+			).then((response) => response.json());
+			description =
+				description + onlineplayers.username.replace("*", "") + "\n";
+		}
 		const embed = new MessageEmbed()
 			.setTitle(resp.server.name)
-			.setDescription(
-				online +
-					"\n" +
-					resp.server.playerCount +
-					"/" +
-					resp.server.maxPlayers +
-					" players\n" +
-					`IP: ${resp.server.name}.minehut.gg\n` +
-					`ID: ${resp.server._id}\n` +
-					`Server Type: ${resp.server.server_version_type}\n` +
-					whiteliststatus +
-					"\n" +
-					`Server Plan: ${resp.server.activeServerPlan}`
-			);
+			.setDescription(description);
 		interaction.editReply({
 			embeds: [embed],
 		});

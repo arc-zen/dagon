@@ -1,2 +1,2 @@
-# WandererInJS
-i should've named this better
+# dagon
+shit bot written by a shit developer

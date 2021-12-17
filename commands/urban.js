@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
+const bad = require("../blacklist.json").blacklist;
 const trim = (str, max) =>
 	str.length > max ? `${str.slice(0, max - 3)}...` : str;
 module.exports = {
@@ -15,21 +16,6 @@ module.exports = {
 		),
 	async execute(interaction) {
 		// for the sake of your eyes, collapse this in your editor. Please.
-		const bad = [
-			"dick",
-			"pussy",
-			"pubes",
-			"ass",
-			"anus",
-			"boobs",
-			"tits",
-			"nigger",
-			"hentai",
-			"loli",
-			"shota",
-			"shotacon",
-			"sex",
-		];
 		{
 			await interaction.deferReply();
 		}
@@ -76,7 +62,7 @@ module.exports = {
 				{ name: "Example", value: trim(answer.example, 1024) },
 				{
 					name: "Rating",
-					value: `${answer.thumbs_up} :thumbsup: || ${answer.thumbs_down} :thumbsdown:`,
+					value: `${answer.thumbs_up} :thumbsup: // ${answer.thumbs_down} :thumbsdown:`,
 				}
 			);
 		interaction.editReply({ embeds: [embed] });

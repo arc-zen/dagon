@@ -13,6 +13,7 @@ module.exports = {
 				.setRequired(true)
 		),
 	async execute(interaction) {
+		var i = 0;
 		let starttime = new Date();
 		const start = new Date();
 
@@ -21,7 +22,9 @@ module.exports = {
 			`https://api.minehut.com/server/${interaction.options.getString(
 				"server"
 			)}?byName=true`
-		).then((response) => response.json());
+		)
+			.then((response) => response.json())
+			.then(i++);
 		if (resp.ok == false) {
 			return await interaction.editReply(
 				"i couldn't find that server... you sure it exists?"
@@ -36,16 +39,13 @@ module.exports = {
 			? `${resp.server.name} is whitelisted`
 			: `${resp.server.name} is not whitelisted`;
 		var description =
+			`${resp.server.name}.minehut.gg\n` +
 			online +
+			` (${resp.server.playerCount}/${resp.server.maxPlayers})` +
 			"\n" +
 			whiteliststatus +
 			"\n" +
-			resp.server.playerCount +
-			"/" +
-			resp.server.maxPlayers +
-			" players\n" +
 			`Time Created: ${creationdate.toUTCString()}\n` +
-			`IP: ${resp.server.name}.minehut.gg\n` +
 			`Server Type: ${resp.server.server_version_type}\n` +
 			`Server Plan: ${resp.server.activeServerPlan}\n\n` +
 			"**online players**:\n";
@@ -55,7 +55,10 @@ module.exports = {
 				// change the UUIDs that the minehut api provides into minecraft usernames... using another api
 				const onlineplayers = await fetch(
 					`https://api.ashcon.app/mojang/v2/user/${n}`
-				).then((response) => response.json());
+				)
+					.then((response) => response.json())
+					.then(i++);
+
 				var username = onlineplayers.username;
 				if (c.staff.includes(username)) {
 					username = "☆ " + username;
@@ -67,10 +70,9 @@ module.exports = {
 				console.log(
 					"took " + (starttime2 - starttime) / 1000 + " seconds"
 				);
+				console.log(`api call #${i}`);
 				starttime = new Date();
 			}
-			const now = new Date();
-			var elapsed = `${start - now / 1000} seconds`;
 		} else {
 			description = description + "none lmfao";
 		}
@@ -81,7 +83,11 @@ module.exports = {
 				"**MOTD**:",
 				resp.server.motd.replace(/&[0-9|A-Z|a-z]/g, "")
 			)
-			.setFooter(`ID: ${resp.server._id} // Time Elapsed: ${elapsed}`);
+			.setFooter(
+				`ID: ${resp.server._id}\nTime Elapsed: ${
+					(new Date() - start) / 1000
+				} seconds\nCalled an API ${i} times`
+			);
 		interaction.editReply({
 			embeds: [embed],
 		});

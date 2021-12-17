@@ -1,0 +1,28 @@
+// this will be your base config file
+{
+	// your bot's ID
+	"clientId": "placeholder",
+	// your main guild's ID
+	"guildId": "placeholder",
+	// your bot's token
+	"token": "no",
+	// list of special people's MC usernames
+	"staff": ["arczen"],
+	// list of status messages to be randomly chosen from every minute
+	// to save you time, here are the ones the main dagon bot uses.
+	// you can edit as you please.
+	"m": [
+		"the world burn",
+		"arczen suffer",
+		"the color blue",
+		"death in the face",
+		"the world turn slowly",
+		"the grass grow",
+		"humanity",
+		"inevitable fate",
+		"earth's effervescent life",
+		"the chromatic glory of something",
+		"the scintillation of mourning lightrays",
+		"over you"
+	]
+}

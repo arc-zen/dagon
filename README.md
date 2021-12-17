@@ -1,4 +1,2 @@
-# WandererInJS
-super idol de xiaorong
-super co0l djs13 bot
-yaya
+# dagon
+shit bot written by a shit developer

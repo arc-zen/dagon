@@ -1,4 +1,2 @@
 # WandererInJS
-super idol de xiaorong
-super co0l djs13 bot
-yaya
+i should've named this better

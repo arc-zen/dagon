@@ -21,7 +21,12 @@ module.exports = {
 		Canvas.registerFont("./misc/FiraCode-Retina.ttf", {
 			family: "Monospace",
 		});
-		const canvas = Canvas.createCanvas(1000, 70);
+		if (interaction.options.getString("text").length >= 28) {
+			return interaction.reply(
+				"i can only render up to 27 characters until arczen finds a new way to do this thing"
+			);
+		}
+		const canvas = Canvas.createCanvas(1000, 80);
 		const context = canvas.getContext("2d");
 		context.font = "60px 'Fira Code Retina'";
 		context.fillStyle = "#ffffff";

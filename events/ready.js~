@@ -19,7 +19,7 @@ module.exports = {
 			client.user.setActivity(m[(m.length * Math.random()) | 0], {
 				type: "WATCHING",
 			});
-		}, 60000);
+		}, 5000);
 		client.user.setStatus("online");
 	},
 };

@@ -76,7 +76,7 @@ module.exports = {
 				{ name: "Example", value: trim(answer.example, 1024) },
 				{
 					name: "Rating",
-					value: `${answer.thumbs_up} :thumbsup: // ${answer.thumbs_down} :thumbsdown:`,
+					value: `${answer.thumbs_up} :thumbsup: || ${answer.thumbs_down} :thumbsdown:`,
 				}
 			);
 		interaction.editReply({ embeds: [embed] });

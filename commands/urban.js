@@ -54,7 +54,7 @@ module.exports = {
 			);
 		}
 		const embed = new MessageEmbed()
-			.setColor("#EFFF00")
+			.setColor(`${Math.floor(Math.random() * 16777215).toString(16)}`)
 			.setTitle(answer.word)
 			.setURL(answer.permalink)
 			.addFields(

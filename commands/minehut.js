@@ -39,7 +39,6 @@ module.exports = {
 			? `${resp.server.name} is whitelisted`
 			: `${resp.server.name} is not whitelisted`;
 		var description =
-			`${resp.server.name}.minehut.gg\n` +
 			online +
 			` (${resp.server.playerCount}/${resp.server.maxPlayers})` +
 			"\n" +
@@ -51,6 +50,9 @@ module.exports = {
 			"**online players**:\n";
 		if (resp.server.playerCount !== 0) {
 			console.log(`\nstarting player loop for ${resp.server.name}`);
+			console.log(
+				`loop started by ${interaction.user.username}#${interaction.user.discriminator}`
+			);
 			for (const n of resp.server.players) {
 				// change the UUIDs that the minehut api provides into minecraft usernames... using another api
 				const onlineplayers = await fetch(
@@ -60,8 +62,8 @@ module.exports = {
 					.then(i++);
 
 				var username = onlineplayers.username;
-				if (c.staff.includes(username)) {
-					username = "☆ " + username;
+				if (c.staff.includes(n)) {
+					username = c.special_username_prefix + " " + username;
 				}
 				description =
 					description + username.replace("*", "(BEDROCK)") + "\n";
@@ -77,7 +79,7 @@ module.exports = {
 			description = description + "none lmfao";
 		}
 		const embed = new MessageEmbed()
-			.setTitle(resp.server.name)
+			.setTitle(resp.server.name + ".minehut.gg")
 			.setDescription(description)
 			.addField(
 				"**MOTD**:",

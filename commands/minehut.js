@@ -66,7 +66,7 @@ module.exports = {
 					username = c.special_username_prefix + " " + username;
 				}
 				description =
-					description + username.replace("*", "(BEDROCK)") + "\n";
+					description + username.replace("*", "(BEDROCK) ") + "\n";
 				const starttime2 = new Date();
 				console.log("received username for " + onlineplayers.username);
 				console.log(
@@ -90,6 +90,8 @@ module.exports = {
 					(new Date() - start) / 1000
 				} seconds\nCalled an API ${i} times`
 			);
+		if (resp.server.online == true) embed.setColor("#a3be8c");
+		else embed.setColor("#bf616a");
 		interaction.editReply({
 			embeds: [embed],
 		});
